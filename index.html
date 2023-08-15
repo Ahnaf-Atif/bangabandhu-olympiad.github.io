@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mujib Olypiad</title>
+<style>
+  /* Your CSS styles here */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #222;
+    color: #fff;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .container {
+    max-width: 600px;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .section-buttons {
+    margin-bottom: 20px;
+  }
+  
+  .section-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .section-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .quiz {
+    display: none; /* Hide the quiz section by default */
+  }
+  
+  .quiz.active {
+    display: block; /* Show the quiz section when active class is applied */
+  }
+  
+  .question {
+    font-size: 18px;
+    margin: 20px 0;
+  }
+  
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .option {
+    font-family: monospace;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #b5b5b5;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .option:hover {
+    background-color: #140026;
+    color: #15ff00;
+  }
+  
+  .result {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 20px 0;
+  }
+  
+  .next-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4b096e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .next-button:disabled {
+    background-color: #666;
+    cursor: not-allowed;
+  }
+  
+  .next-button:hover {
+    background-color: #220433;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1f1f1f;
+  }
+  
+  .author {
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+  }
+
+  .author a {
+    text-decoration: none;
+    color: #007bff;
+    transition: color 0.3s;
+  }
+
+  .author a:hover {
+    color: #0056b3;
+  }
+
+  #bottom-text {
+    position: absolute;
+    bottom: 20px;
+    font-size: 14px;
+    color: #777;
+  }
+
+  /* Add this code to your existing CSS */
+
+
+  
+  
+  
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Mujib Olympiad (prototype)</h1>
+  <div class="section-buttons">
+    <button class="section-button" onclick="startQuiz()">Start Quiz</button>
+  </div>
+  <div id="quiz" class="quiz">
+    <div class="question">Question goes here.</div>
+    <div class="options">
+      <button class="option" onclick="checkAnswer(1)">Option 1</button>
+      <button class="option" onclick="checkAnswer(2)">Option 2</button>
+      <button class="option" onclick="checkAnswer(3)">Option 3</button>
+      <button class="option" onclick="checkAnswer(4)">Option 4</button>
+    </div>
+    
+
+    
+
+
+    <div class="result"></div>
+  </div>
+  <div class="quiz-navigation">
+    <button class="next-button" onclick="nextQuestion()" disabled>Next</button>
+  </div>
+</div>
+
+<div class="author" id="bottom-text">
+    Author: <a href="https://example.com" target="_blank">Ahnaf Atif</a>
+  </div>
+<script>
+  const questions = [
+    {
+      question: "1. When and where was Bangabandhu Sheikh Mujibur Rahman born?",
+      options: ["March 17, 1920, Tungipara", "February 21, 1952, Dhaka", "July 4, 1971, Chittagong", "April 8, 1945, Sylhet"],
+      correctAnswer: 1,
+    },
+    {
+      question: "2.Who were Bangabandhu's parents?",
+      options: ["Sheikh Lutfur Rahman and Sheikh Fazilatunnesa", "Sheikh Hasina and Sheikh Rehana", "Sheikh Sayera Khatun and Sheikh Lutfur Rahman", "Sheikh Mokhlesur Rahman and Sheikh Marjina"],
+      correctAnswer: 3,
+    },
+    {
+      question: "3. What did Bangabandhu study at the University of Dhaka?",
+      options: ["Engineering", "Medicine", "Law", "Business"],
+      correctAnswer: 3,
+    },
+    {
+      question: "4. What political party did Bangabandhu join in 1949?",
+      options: ["Awami League", "Pakistan Peoples Party", "Bangladesh Nationalist Party", "Jatiya Party"],
+      correctAnswer: 1,
+    },
+    {
+      question: "5. What significant event happened in the 1970 general elections?",
+      options: ["Awami League secured 160 out of 162 East Pakistani seats", "A military coup took place", "The capital was moved to Dhaka", "Bangladesh declared independence"],
+      correctAnswer: 1,
+    },
+    {
+      question: "6. When was Bangabandhu arrested by Pakistani authorities?",
+      options: ["March 7, 1971", "March 25, 1971", "December 16, 1971", "April 4, 1971"],
+      correctAnswer: 2,
+    },
+    {
+      question: "7. Which country played a pivotal role in supporting Bangladesh's independence during the Liberation War?",
+      options: ["India", "USA", "China", "UK"],
+      correctAnswer: 1,
+    },
+    {
+      question: "8.What positions did Bangabandhu hold after Bangladesh's independence?",
+      options: ["President and Prime Minister", "Prime Minister and Foreign Minister", "Prime Minister and Defense Minister", "Chief Justice and Army Chief"],
+      correctAnswer: 1,
+    }
+    // Add more questions and answers here
+  ];
+
+  let currentQuestionIndex = 0;
+  const totalQuestions = questions.length;
+
+  const quizSection = document.getElementById('quiz');
+  const questionDiv = quizSection.querySelector('.question');
+  const optionsDiv = quizSection.querySelector('.options');
+  const resultDiv = quizSection.querySelector('.result');
+  const nextButton = document.querySelector('.next-button');
+
+  function startQuiz() {
+    showQuestion();
+    nextButton.disabled = false;
+    quizSection.classList.add('active'); // Add 'active' class to show the quiz section
+    document.querySelector('.section-buttons').style.display = 'none';
+  }
+
+  function showQuestion() {
+    const question = questions[currentQuestionIndex];
+    questionDiv.textContent = question.question;
+
+    optionsDiv.innerHTML = '';
+    question.options.forEach((option, index) => {
+      const button = document.createElement('button');
+      button.classList.add('option');
+      button.textContent = option;
+      button.onclick = () => checkAnswer(index);
+      optionsDiv.appendChild(button);
+    });
+
+    resultDiv.textContent = '';
+  }
+
+  function checkAnswer(selectedIndex) {
+    const question = questions[currentQuestionIndex];
+    
+    const correctIndex = question.correctAnswer - 1;
+
+    if (selectedIndex === correctIndex) {
+      resultDiv.textContent = "Correct!";
+    } else {
+      resultDiv.textContent = "Incorrect. The correct answer was: " + question.options[correctIndex];
+    }
+
+    optionsDiv.querySelectorAll('.option').forEach(button => button.disabled = true);
+    nextButton.disabled = false;
+  }
+
+  function nextQuestion() {
+    currentQuestionIndex++;
+
+    if (currentQuestionIndex < totalQuestions) {
+      showQuestion();
+      nextButton.disabled = true;
+    } else {
+      questionDiv.textContent = "Quiz completed!";
+      optionsDiv.innerHTML = '';
+      resultDiv.textContent = '';
+      nextButton.disabled = true;
+    }
+    document.querySelector('.congratulations').style.display = 'block';
+
+  }
+ 
+</script>
+</body>
+</html>
